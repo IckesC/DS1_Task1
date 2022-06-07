@@ -26,8 +26,8 @@ def process_file(path: str, file_name: str):
             signal_per_sec = [np.median(sec) for sec in channel]
             time = len(signal_per_sec)
 
-            iqr = np.quantile(signal_per_sec, 0.75) - np.quantile(signal_per_sec, 0.25)
-            upper_bar = np.median(signal_per_sec) + 1.5 * iqr
+            #iqr = np.quantile(signal_per_sec, 0.75) - np.quantile(signal_per_sec, 0.25)
+            upper_bar = 0
 
             for j in range(len(signal_per_sec)):
                 if signal_per_sec[j] >= upper_bar:
