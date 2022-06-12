@@ -32,6 +32,7 @@ def process_file(path: str, file_name: str):
             for j in range(len(signal_per_sec)):
                 if signal_per_sec[j] >= upper_bar:
                     activations[j].add(f"{DESC_CHANNELS[i]}")
+            break
 
     return activations, time
 

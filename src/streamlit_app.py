@@ -116,11 +116,11 @@ if __name__ == '__main__':
     new_indexes, itemlists = get_indexes_and_itemsets(indexes)
 
     res = evaluate(new_indexes, itemlists, len(df.index))
-    res_df = pd.DataFrame(res, columns=["Rules", "Avg Support", "Confidence", "Lift", "Conviction"])
+    res_df_norm = pd.DataFrame(res, columns=["Rules", "Avg Support", "Confidence", "Lift", "Conviction"])
 
     st.markdown("## Normal Adolesence")
     st.text(f"Itemsets: {len(df.index)}\tRules:{len(res)}")
-    res_df
+    res_df_norm
 
     # Schizo data
     df = pd.read_csv(path_schiz, header=None)
@@ -128,8 +128,13 @@ if __name__ == '__main__':
     new_indexes, itemlists = get_indexes_and_itemsets(indexes)
 
     res = evaluate(new_indexes, itemlists, len(df.index))
-    res_df = pd.DataFrame(res, columns=["Rules", "Avg Support", "Confidence", "Lift", "Conviction"])
+    res_df_schiz = pd.DataFrame(res, columns=["Rules", "Avg Support", "Confidence", "Lift", "Conviction"])
 
     st.markdown("## Schizophrenia Adolesence")
     st.text(f"Itemsets: {len(df.index)}\tRules:{len(res)}")
-    res_df
+    res_df_schiz
+
+    st.markdown("## Rules Appearing only in Schizophrenia Data")
+    view_only_schiz = res_df_schiz[~res_df_schiz["Rules"].isin(res_df_norm["Rules"])]
+    st.text(f"Rules:{len(view_only_schiz)}")
+    view_only_schiz
